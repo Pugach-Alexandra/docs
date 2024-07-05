@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Stripe API",
+    "description": "API specification for searching customers in Stripe",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.stripe.com/v1"
+    }
+  ],
+  "paths": {
+    "/customers/search": {
+      "get": {
+        "summary": "Search customers",
+        "description": "Search for customers in Stripe using query parameters.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "name:'Jane Doe' AND metadata['foo']:'bar'"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "object": {
+                      "type": "string",
+                      "example": "search_result"
+                    },
+                    "url": {
+                      "type": "string",
+                      "example": "/v1/customers/search"
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "cus_NeGfPRiPKxeBi1"
+                          },
+                          "object": {
+                            "type": "string",
+                            "example": "customer"
+                          },
+                          "address": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "balance": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "created": {
+                            "type": "integer",
+                            "example": 1680569616
+                          },
+                          "currency": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "default_source": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "delinquent": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "discount": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "email": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "invoice_prefix": {
+                            "type": "string",
+                            "example": "47D37F8F"
+                          },
+                          "invoice_settings": {
+                            "type": "object",
+                            "properties": {
+                              "custom_fields": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                              },
+                              "default_payment_method": {
+                                "type": "string",
+                                "example": "pm_1Msy7wLkdIwHu7ixsxmFvcz7"
+                              },
+                              "footer": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                              },
+                              "rendering_options": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                              }
+                            }
+                          },
+                          "livemode": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "example": {
+                              "foo": "bar"
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Jane Doe"
+                          },
+                          "next_invoice_sequence": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "phone": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "preferred_locales": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "shipping": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "tax_exempt": {
+                            "type": "string",
+                            "example": "none"
+                          },
+                          "test_clock": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
